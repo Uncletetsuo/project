@@ -4,4 +4,7 @@ channels:
 dependencies:
   - python
   - requests
+  - fastapi
+  - uvicorn
+  - uvicorn-standard
 prefix: /home/fercs/anaconda3/envs/pyweb
