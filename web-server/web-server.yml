@@ -1,0 +1,7 @@
+name: pyweb
+channels:
+  - defaults
+dependencies:
+  - python
+  - requests
+prefix: /home/fercs/anaconda3/envs/pyweb
