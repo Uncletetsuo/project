@@ -10,7 +10,7 @@ def generate_pie_chart(labels, values):
     fig, ax = plt.subplots()
     ax.pie(values, labels=labels) # <--- This is how the pie chart works it differs to the bar chart 
     ax.axis('equal')
-    plt.savefig('./pie.png') # That's how it roll so 
+    plt.savefig('./pay.png') # That's how it roll so 
     plt.close()
 
 

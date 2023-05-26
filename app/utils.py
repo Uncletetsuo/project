@@ -9,7 +9,6 @@ def get_population(country_dict):
         '1980': int(country_dict['1980 Population']),
         '1970': int(country_dict['1970 Population'])
     }
-    print(population_dict)
     labels = population_dict.keys()
     values = population_dict.values()
     return labels, values
