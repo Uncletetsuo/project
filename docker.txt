@@ -1,0 +1,50 @@
+in this file we're going to fill the script to use to execute a docker container...
+
+working 
+
+-------------  create a dockerfile
+
+FROM python:3.10.6 <---- what version of python we will use
+
+WORKDIR /app <----- the directory we're creating to work in the container
+COPY requirements.txt /app/requirements.txt <------ copying the local env txt file into the container
+
+
+RUN pip install --no-cache-dir --upgrade r /app/requirements.txt  <------- running the command to install the venv to work with our python without the cache and upgrading the dependencies without causing conflict
+
+copy . /app   <---- copy everything from local to this dir in the container
+
+CMD bash -c 'while true; do sleep 1; done' <---------- this will keep the docker terminal online, this is a bash prompt
+
+
+
+-----------  so how we can execute a true docker compose? let's use the compose file to end the configuration 
+services:
+  app-csv:  # this is how we're going to call the service that we're executing
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - .:/app   # this makes the files sync with the container online 
+
+
+------------- once the docker files are finished let's jump on to the terminal so we can set up the dockerfiles properly
+$ docker-compose build
+Right here docker is building the image that we're going to use following the instructions within the dockerfile
+
+$ docker-compose up -d 
+Creating and starting the container 
+
+$ docker-compose ps
+you can list the containers that are running on docker 
+
+$ docker-compose exec app-csv bash
+with this we're entering the container to work on our app, and we're telling docker that we want a Bash shell
+it's like entering a unix server
+
+$ exit 
+you can safely exit the container 
+
+$ docker-compose down 
+this command is to remove the previous container
+

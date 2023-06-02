@@ -1,0 +1,126 @@
+if you feel lost just return to this txt you will always find your way with anaconda and the base
+well the first thing you need to know after installing and setting your fist Py Base 
+
+in WSL you can get a jupyter-notebook to work with your environment
+
+'''sh
+jupyter-notebook 
+'''
+output//
+[I 2023-05-22 22:06:04.430 LabApp] JupyterLab extension loaded from /home/fercs/anaconda3/lib/python3.9/site-packages/jupyterlab
+[I 2023-05-22 22:06:04.430 LabApp] JupyterLab application directory is /home/fercs/anaconda3/share/jupyter/lab
+[I 22:06:04.435 NotebookApp] Serving notebooks from local directory: /home/fercs/anaconda3
+[I 22:06:04.435 NotebookApp] Jupyter Notebook 6.4.8 is running at:
+[I 22:06:04.435 NotebookApp] http://localhost:8888/?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24
+[I 22:06:04.435 NotebookApp]  or http://127.0.0.1:8888/?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24
+[I 22:06:04.435 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 22:06:06.119 NotebookApp] No web browser found: could not locate runnable browser.
+[C 22:06:06.119 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home/fercs/.local/share/jupyter/runtime/nbserver-1811-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24         <--- You need to click on this one, just windows things
+     or http://127.0.0.1:8888/?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24
+[I 22:06:29.833 NotebookApp] 302 GET /?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24 (127.0.0.1) 0.600000ms
+[I 22:06:41.918 NotebookApp] 302 GET /?token=6be9b9ccb027d98836d77565d7e13595c78b39abc85ddb24 (127.0.0.1) 1.310000ms
+//
+
+you can create ipynb in the browser running on localhost
+
+to end that process you need to press ctrl-c on the terminal
+
+now you can create untitled ipynb and you can open them with vscode with the command
+code .
+that open the place were we are in the terminal (just be inside of the Documents directory) 
+open the notebook and select a kernel
+
+
+Now, the thing that confuses us to this day.. how could I know what environment I am using?
+you can list with the shell command '''
+$ conda env list --
+                   |
+                   |
+# conda environments:
+#
+base                  *  /home/fercs/anaconda3
+
+The name of the          the place where it 
+environment              is stored
+//////////////////////////////////////////////////////////
+Let's create a new env
+conda create --name py35 python <--- this install the newest version of python available 
+conda create --name py35 python=3.5 pandas <--- this install an specific version of python and other modules that are compatible with that version
+
+how to switch between environments? plain simple you don't need to deactivate the environments 
+$ conda activate py35
+$ conda activate base
+$ conda deactivate    <---- this is used to exit any conda environment
+
+$conda list ---> (it shows every installed module in the environment)
+
+$ conda list matplotlib ---> (it filters the modules to show only the ones that are related to matplotlib )
+# packages in environment at /home/fercs/anaconda3:
+#
+# Name                    Version                   Build  Channel
+matplotlib                3.5.1            py39h06a4308_1  
+matplotlib-base           3.5.1            py39ha18d171_1  
+matplotlib-inline         0.1.2              pyhd3eb1b0_2  
+
+but what if you want to update your modules to a recent version you can achive that with this
+
+$ conda update matplotlib  ---> 
+
+To install or "update" a specific package you need this command
+now, if you install a new version of python all of the other pkgs are updated as well
+
+$ conda install [pkg]=[version]   --->
+
+If you want to rename your environment you need to clone your current environment and change the name, you can do that with this command
+
+$conda create --name [nuevo ambiente] --copy --clone [ambiente anterior]
+
+what if you want to delete a specific module
+
+$ conda remove matplotlib   ---> (no output) 
+$ conda list  --> (check for the missing pkg)
+
+to remove an env 1st it needs to be deactivated
+
+$ conda deactivate
+$ conda env remove --name [env name]
+
+advanced commands
+
+$ conda create --name py39 python=3.9 pandas=1.
+imagine one day you want to install a module that is not to be found in the main repositories
+
+$ conda install boltons
+
+enter to anaconda.org ---> search pkgs ---> you found the channels
+
+$ conda install --channel conda-forge boltons
+
+if you want to delete, there is a smarter way to eliminate modules without the remove command
+
+$ conda list --revision ---> this will give you a list of all of the changes made to the environment and group them in categories called revision (0 - n+1)
+
+for example you are in revision 1 and you want to eliminate the pkg you just installed and the others that came with it let's use this
+
+$ conda install --revision 0 ---> this will take you to a previous state of your project and putting your current state in 'revision 2'
+
+now, what if we want to export our environment to anyone so they can work with our project, it's pretty simple
+
+$  conda env export  --no-builds  ---> this gives us a raw view of our modules and their version without the builds
+
+$ conda env export --from-history ---> this return the modules that we added manually and is the best way to export our environment
+
+$ conda env export --from-history --file nombre_archivo.yml ---> this exports all of the data into a .yml file that we can share 
+
+$ conda env create --file nombre_archivo.yml  ---> this will create the environment suited to work with the project 
+
+
+Let's say that you want to be faster when it comes to creating environments, use mamba
+$ conda install --channel conda-forge mamba
+
+$ mamba env create --file environment.yaml

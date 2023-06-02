@@ -15,6 +15,6 @@ def read_csv(path): #Declaring the function with the path as a parameter
 #   This is due to the fact that i'm not printing anything in the  Function             |
 #    And I have to save the returned value                                              |
 if __name__ == '__main__':                             #                                |
-    data = read_csv('/home/fercs/Documents/python_lambda/app/data.csv')   #<------------
+    data = read_csv('/app/data.csv')   #<------------
     print(data[12]) # the only way to put the data on the terminal is giving it a list index, because it's a lot easier
     # to navigate between a sea of data with the list methods, so there's a lot of advantage with using a dictionary within a list    

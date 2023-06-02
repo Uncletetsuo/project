@@ -181,6 +181,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+pyserver/
+my-env/
 
 # Spyder project settings
 .spyderproject

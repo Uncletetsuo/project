@@ -7,14 +7,14 @@ import pandas as pd
 
 def run():
 #new structure with pandas
-    data = pd.read_csv('/home/fercs/Documents/Project/app/data.csv')
+    data = pd.read_csv('/app/data.csv')
     data = data[data['Continent'] == 'Asia']
     countries = data['Country/Territory'].values
     percentages = data['World Population Percentage'].values
     charts.generate_pie_chart(countries, percentages)
     
     #data2 = pd.read_csv('/home/fercs/Documents/Project/app/data.csv')
-    data2 = read_csv.read_csv('/home/fercs/Documents/Project/app/data.csv')
+    data2 = read_csv.read_csv('/app/data.csv')
     country = str(input('Que pais quieres ver => '))
     result = utils.population_by_country(data2, country)
     if len(result) > 0:
