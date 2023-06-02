@@ -1,0 +1,9 @@
+services:
+  web-server:  # this is how we're going to call the service that we're executing
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - .:/app   # this makes the files sync with the container online 
+    ports: 
+      - '80:80'
